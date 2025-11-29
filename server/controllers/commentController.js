@@ -1,4 +1,6 @@
 const Comment = require("../models/commentModel")
+const User = require("../models/userModel")
+const Event = require("../models/eventModel")
 
 const getComments = async(req,res)=>{
      
@@ -19,12 +21,21 @@ const addComment = async(req,res)=>{
         throw new Error('Please Add Text!')
     }
     const newComment = await Comment.create({text : req.body.text, user : req.user._id, event:req.params.eid})
-     
-    if(!newComment){
+
+ const event = await Event.findById(req.params.eid)
+ const user = await User.findById(req.user._id)
+
+    if(!newComment || !event || !user){
         res.status(400)
         throw new Error("Comment Not Added!")
     }
-    res.status(201).json(newComment)
+    res.status(201).json({
+        _id: newComment._id,
+        createdAt: newComment.createdAt,
+        text: newComment.text,
+        event,
+        user
+    })
     }
 
 

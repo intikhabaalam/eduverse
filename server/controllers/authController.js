@@ -73,8 +73,8 @@ const loginUser = async(req,res)=>{
  const user = await User.findOne({email})
 
  if(user && await bcrypt.compare(password,user.password)){
-     
-     res.status(200).json({
+      if(user.isActive){
+            res.status(200).json({
 
      _id : user._id,
      name : user.name,
@@ -87,6 +87,12 @@ const loginUser = async(req,res)=>{
 
 
      })
+      }else{
+
+      res.status(401)
+      throw new Error('Acount Disabled!')
+
+      }
 
  }else{
    res.status(401)

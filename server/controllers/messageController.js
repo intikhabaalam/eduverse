@@ -1,14 +1,28 @@
 const Message = require("../models/messageModel")
-
+const Listing = require("../models/listingModel")
 
 const getMessages = async(req,res)=>{
 
-   const messages= await Message.find({listing:req.params.pid}).populate('user').populate('listing')
-         if (!messages){
-           res.status(404)
-           throw new Error('Messages Not Found')
-         } 
-         res.status(200).json(messages)
+    try {
+        // Get all listing IDs created by the logged-in user
+        const myListingIds = await Listing.find({ user: req.user._id }).distinct("_id");
+
+        // Fetch only messages whose listing matches user's listings
+        const messages = await Message.find({
+            listing: { $in: myListingIds }
+        })
+            .populate("user")
+            .populate("listing");
+
+        if (!messages) {
+            return res.status(404).json({ message: "No messages found!" });
+        }
+
+        res.status(200).json(messages);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
 
 const sendMessage = async(req,res)=>{
