@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Store } from "lucide-react";
 import productService from "./productService";
 
 const productSlice = createSlice({

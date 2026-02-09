@@ -1,5 +1,3 @@
-// UI Only — Mock data for college events
-
 export const mockEvents = [
   {
     id: 1,

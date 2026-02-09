@@ -1,5 +1,5 @@
 import axios from "axios"
-import { UploadCloudIcon } from "lucide-react"
+
 
 
 const API_URL = "/api/admin/"
