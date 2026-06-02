@@ -40,7 +40,7 @@ const updateListing = async (updatedProduct,token)=>{
     }
 
  const response = await axios.put("/api/admin/product/" + updatedProduct._id,updatedProduct , options)
-  console.log(response.data)
+ 
   return response.data
   
 }
@@ -54,7 +54,7 @@ const updateUser = async (updatedUser,token)=>{
     }
 
  const response = await axios.put("/api/admin/user/" + updatedUser._id,updatedUser , options)
-  console.log(response.data)
+  
   return response.data
   
 }
@@ -68,7 +68,7 @@ const createEvent = async (formData ,token) =>{
     }
 
  const response = await axios.post("/api/admin/event",formData, options)
-  console.log(response.data)
+  
   return response.data 
   
 }
@@ -82,7 +82,7 @@ const update = async (updatedEvent,token) =>{
     }
 
  const response = await axios.put("/api/admin/event/" + updatedEvent._id,updatedEvent, options)
-  console.log(response.data)
+ 
   return response.data 
   
 }

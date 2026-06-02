@@ -27,6 +27,8 @@ const navigate = useNavigate()
     { path: '/', label: 'Home' },
     { path: '/marketplace', label: 'Marketplace' },
     { path: '/events', label: 'Events' },
+    { path: '/ai', label: 'AI Hub' },
+
   ];
 
   const isActive = (path) => location.pathname === path;

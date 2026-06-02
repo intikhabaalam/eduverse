@@ -12,7 +12,7 @@ import Admin from './pages/Admin'
 import PrivateComponent from './components/PrivateComponents'
 import PageNotFound from './pages/PageNotFound'
 import EventDetail from './pages/EventDetail'
-
+import AIHub from './pages/AIHub'
 
 const App = () => {
   return (
@@ -21,6 +21,7 @@ const App = () => {
       <Routes>
         <Route path = 'marketplace/:pid' element={<ProductDetail/>}/>
         <Route path = '*' element={<PageNotFound />}/>
+        <Route path='/ai' element={<AIHub />} />
         <Route path = '/' element={<Landing />}/>
         <Route path = '/marketplace' element={<Marketplace/>}/>
         <Route path = '/events' element={<Events/>}/>

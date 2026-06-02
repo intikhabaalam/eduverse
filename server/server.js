@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const path = require('path')
 const colors = require('colors')
+const cors = require('cors')
 const connectDB = require('./config/dbConfig')
 const errorhandler = require('./middleware/errorHandler')
 
@@ -11,17 +12,9 @@ const app = express()
 connectDB()
 
 //middleware
+app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded ())
-// Home Route
-
-// app.all("/",(req,res) => {
-// //     res.json({
-// //         msg:"WELCOME TO EDUVERSE API 1.0"
-// //     })
-
-   
-// // })
+app.use(express.urlencoded ( {extended:true} ))
 
 
 
@@ -35,7 +28,8 @@ app.use(express.urlencoded ())
   app.use("/api/event", require("./routes/eventRoutes")) 
   //Admin Routes
   app.use("/api/admin",require("./routes/adminRoutes")) 
-
+  // AI Routes
+  app.use('/api/ai', require('./routes/aiRoutes'))
 
     //Default Route 
   if(process.env.NODE_ENV === "production"){

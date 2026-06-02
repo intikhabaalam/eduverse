@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import AddEvent from '../components/AddEvent';
 
-
 const Admin = () => {
 
 const {user} = useSelector(state => state.auth)

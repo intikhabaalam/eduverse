@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Dynamic API URL
 const API_URL = import.meta.env.PROD
-  ? "/api/auth/"                  // Production = same port
-  : "http://localhost:5000/api/auth/";  // Dev = separate port
+  ? "/api/auth/"                 
+  : "http://localhost:8080/api/auth/";  
 
 // Register user
 const register = async (formData) => {
