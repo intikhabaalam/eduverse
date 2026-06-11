@@ -16,7 +16,7 @@ const protect = async ( req,res,next)=>{
 
      if(!user){
         res.status(401)
-        throw new Error ('Unauthorsed access')
+        throw new Error ('Unauthorized access')
      }
       
    req.user = user
