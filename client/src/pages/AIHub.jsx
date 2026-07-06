@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+const API_URL = import.meta.env.PROD
+    ? "/api/ai"
+    : "http://localhost:8080/api/ai";
+
 const AIHub = () => {
 
     const { user } = useSelector((state) => state.auth)
@@ -15,12 +19,15 @@ const AIHub = () => {
 
     // EVENT GENERATOR
     const generateEvent = async () => {
+        console.log("Sending AI request...");
+        console.log("API URL:", `${API_URL}/generate-event`);
+        console.log("Request Body:", { title });
 
         try {
 
             setLoadingEvent(true)
 
-            const res = await fetch('http://localhost:8080/api/ai/generate-event', {
+            const res = await fetch(`${API_URL}/generate-event`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -28,14 +35,19 @@ const AIHub = () => {
                 body: JSON.stringify({ title })
             })
 
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
             const data = await res.json()
+            console.log("AI response received:", data);
 
             setDescription(data.description)
             setTitle('')
 
         } catch (error) {
 
-            console.log(error)
+            console.error("AI Error:", error)
 
         } finally {
 
@@ -45,12 +57,15 @@ const AIHub = () => {
 
     // CHATBOT
     const askAI = async () => {
+        console.log("Sending AI request...");
+        console.log("API URL:", `${API_URL}/chat`);
+        console.log("Request Body:", { message });
 
         try {
 
             setLoadingChat(true)
 
-            const res = await fetch('http://localhost:8080/api/ai/chat', {
+            const res = await fetch(`${API_URL}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -58,7 +73,12 @@ const AIHub = () => {
                 body: JSON.stringify({ message })
             })
 
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
             const data = await res.json()
+            console.log("AI response received:", data);
 
             setReply(data.reply)
 
@@ -66,7 +86,7 @@ const AIHub = () => {
 
         } catch (error) {
 
-            console.log(error)
+            console.error("AI Error:", error)
 
         } finally {
 

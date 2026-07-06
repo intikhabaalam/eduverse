@@ -6,6 +6,9 @@ const groq = new Groq({
 
 // EVENT GENERATOR
 const generateEventDescription = async (req, res) => {
+  console.log("AI route called: generate-event");
+  console.log("Request body:", req.body);
+  console.log(process.env.GROQ_API_KEY ? "GROQ API Key: Loaded" : "GROQ API Key: Missing");
 
   try {
 
@@ -54,6 +57,9 @@ const generateEventDescription = async (req, res) => {
 
 // CHATBOT
 const chatWithAI = async (req, res) => {
+  console.log("AI route called: chat");
+  console.log("Request body:", req.body);
+  console.log(process.env.GROQ_API_KEY ? "GROQ API Key: Loaded" : "GROQ API Key: Missing");
 
   try {
 

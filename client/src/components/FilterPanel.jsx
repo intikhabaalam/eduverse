@@ -100,12 +100,12 @@ const FilterPanel = ({ filters, setFilters, onClose }) => {
                 placeholder="₹100000"
               />
             </div>
-            <div className="h-2 bg-slate-200 rounded-full relative">
+            <div className="h-2 bg-slate-200 rounded-full relative overflow-hidden">
               <div
                 className="absolute h-2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full"
                 style={{
-                  left: `${(filters.priceRange.min / 100000) * 100}%`,
-                  right: `${100 - (filters.priceRange.max / 100000) * 100}%`
+                  left: `${Math.min(Math.max((filters.priceRange.min / 100000) * 100, 0), 100)}%`,
+                  right: `${Math.min(Math.max(100 - (filters.priceRange.max / 100000) * 100, 0), 100)}%`
                 }}
               />
             </div>
